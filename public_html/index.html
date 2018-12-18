@@ -81,22 +81,29 @@ and open the template in the editor.
             document.getElementById("in_vers").value = " ";
         } else {
             var importo = Number.parseFloat(tximp_vers);
-            //sommo finalmente due numeri e non due testi
-            var nuovo_saldo = saldo + importo;
-            //imposto il nuovo valore nello span sp_saldo
-            document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
-            document.getElementById("in_vers").value = " ";
-            
-            //sistemo la tabella dei movimenti
-            var txtd_vers = document.getElementById("td_vers").innerHTML;
-            //gli aggiungo il nuovo importo + a capo con <br>
-            txtd_vers = txtd_vers + tximp_vers + "<br/>";
-            var txtd_prel = document.getElementById("td_prel").innerHTML;
-            //idem per td_prel ma solo con <br>
-            txtd_prel = txtd_prel + "-<br/>";
-            //visualizzo i nuovi dati nelle celle td
-            document.getElementById("td_vers").innerHTML = txtd_vers;
-            document.getElementById("td_prel").innerHTML = txtd_prel;
+            if (importo > 0) {
+
+
+                //sommo finalmente due numeri e non due testi
+                var nuovo_saldo = saldo + importo;
+                //imposto il nuovo valore nello span sp_saldo
+                document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+                document.getElementById("in_vers").value = " ";
+
+                //sistemo la tabella dei movimenti
+                var txtd_vers = document.getElementById("td_vers").innerHTML;
+                //gli aggiungo il nuovo importo + a capo con <br>
+                txtd_vers = txtd_vers + tximp_vers + "<br/>";
+                var txtd_prel = document.getElementById("td_prel").innerHTML;
+                //idem per td_prel ma solo con <br>
+                txtd_prel = txtd_prel + "-<br/>";
+                //visualizzo i nuovi dati nelle celle td
+                document.getElementById("td_vers").innerHTML = txtd_vers;
+                document.getElementById("td_prel").innerHTML = txtd_prel;
+            } else {
+                alert("non hai scritto un numero valido, riprova!");
+                document.getElementById("in_vers").value = " "
+            }
         }
 
     }
@@ -116,20 +123,26 @@ and open the template in the editor.
             document.getElementById("in_prel").value = " ";
         } else {
             var importo = Number.parseFloat(tximp_prelev);
-            //sommo finalmente due numeri e non due testi
-            var nuovo_saldo = saldo - importo;
-            //imposto il nuovo valore nello span sp_saldo
-            document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
-            document.getElementById("in_prel").value = " ";
-            //sistemo la tabella dei movimenti
-            var txtd_prel = document.getElementById("td_prel").innerHTML;
-            // sottraggo il nuovo importo + a capo <br>
-            txtd_prel = txtd_prel + tximp_prelev + "<br/>";
-            var txtd_vers = document.getElementById("td_vers").innerHTML;
-            txtd_vers = txtd_vers + "-<br/>";
-            //visualizzo i nuovi dati nelle celle td
-            document.getElementById("td_vers").innerHTML = txtd_vers;
-            document.getElementById("td_prel").innerHTML = txtd_prel;
+            if (importo > 0) {
+
+                //sommo finalmente due numeri e non due testi
+                var nuovo_saldo = saldo - importo;
+                //imposto il nuovo valore nello span sp_saldo
+                document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+                document.getElementById("in_prel").value = " ";
+                //sistemo la tabella dei movimenti
+                var txtd_prel = document.getElementById("td_prel").innerHTML;
+                // sottraggo il nuovo importo + a capo <br>
+                txtd_prel = txtd_prel + tximp_prelev + "<br/>";
+                var txtd_vers = document.getElementById("td_vers").innerHTML;
+                txtd_vers = txtd_vers + "-<br/>";
+                //visualizzo i nuovi dati nelle celle td
+                document.getElementById("td_vers").innerHTML = txtd_vers;
+                document.getElementById("td_prel").innerHTML = txtd_prel;
+            } else {
+                alert("non hai scritto un numero valido, riprova!");
+                document.getElementById("in_prel").value = " "
+            }
         }
 
     }
