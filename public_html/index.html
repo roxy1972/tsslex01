@@ -9,48 +9,72 @@ and open the template in the editor.
         <title>BANCA TSS</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #banca{
+                display: none;
+            }
+            #login{
+                display: block;
+            }
+
+        </style>
     </head>
     <body>
-        <div id="div_banca">BANCA TSS conto corrente di: <span id="sp_name"></span></div>
+        <div id="login">
+            <h2>LOGIN</h2>
+            <input type="text" id="in_usr" placeholder="ins.username"/><br/>
+            <input type="password" id="in_pwd" placeholder="ins.password"/><br/>
+            <input type="text" id="in_tkn" placeholder="ins.token"/><br/>
+            <button onclick="loginUser()">Login</button>     
+
+
+        </div>
         <br/>
 
-        <input type="text" id="in_name" value="" placeholder=""/> <button id="bt_name" onclick="login()">Login</button>
-        <br/>
-        <br/>
+        <div id="banca">
 
-        <div id="div_saldo">Saldo Corrente: <span id="sp_saldo">0</span> €</div>
-        <br/>
 
-        <div class="versamenti"><h3>VERSAMENTI</h3></div> 
-        <!--H3 serve per dare carattere più grande-->
-        Importo da Versare: <input type="text" id="in_vers" value="" placeholder=""/> <button id="bt_vers" onclick="versaImporto()">Versa importo</button>
-        <br/>
-        <br/>
+            <div >BANCA TSS conto corrente di: <span id="sp_name"></span></div>
+            <br/>
 
-        <div class="prelievi"><h3>PRELIEVI</h3></div>
-        Importo da prelevare: <input type="text" id="in_prel" value="" placeholder=""/> <button id="bt_prel" onclick="prelevaImporto()">Preleva importo</button>
-        <!-- con questo codice inserisco con type text il testo da inserire e con placeholder il testo in grigino che scompare quando digito testo oppure lasciando vuoto tra le "" nn scrive nulla-->
-        <br/>
-        <br/>
-        <br/>
+            <input type="text" id="in_name" value="" placeholder=""/> <button id="bt_name" onclick="login()">Login</button>
+            <br/>
+            <br/>
 
-        <div id="div_notifiche">Area notifiche: <span id="sp_notifiche"> nulla da segnalare</span> </div>
-        <br/>
-        <br/>
-        <br/>
+            <div id="div_saldo">Saldo Corrente: <span id="sp_saldo">0</span> €</div>
+            <br/>
 
-        <div id="div_mov"><h3>MOVIMENTI:</h3>
-            <table border="1">
-                <tr> 
-                    <th>Versamenti</th> <th>Prelevamenti</th>
-                </tr>
+            <div class="versamenti"><h3>VERSAMENTI</h3></div> 
+            <!--H3 serve per dare carattere più grande-->
+            Importo da Versare: <input type="text" id="in_vers" value="" placeholder=""/> <button id="bt_vers" onclick="versaImporto()">Versa importo</button>
+            <br/>
+            <br/>
 
-                <tr> <!--contenuto dei td dovranno essere gli importi che verso o prelevo ad ognuono ci dovrà esser un <br>-->
-                    <td id="td_vers"> </td> 
-                    <td id="td_prel"> </td>      
+            <div class="prelievi"><h3>PRELIEVI</h3></div>
+            Importo da prelevare: <input type="text" id="in_prel" value="" placeholder=""/> <button id="bt_prel" onclick="prelevaImporto()">Preleva importo</button>
+            <!-- con questo codice inserisco con type text il testo da inserire e con placeholder il testo in grigino che scompare quando digito testo oppure lasciando vuoto tra le "" nn scrive nulla-->
+            <br/>
+            <br/>
+            <br/>
 
-                </tr>
-            </table>
+            <div id="div_notifiche">Area notifiche: <span id="sp_notifiche"> nulla da segnalare</span> </div>
+            <br/>
+            <br/>
+            <br/>
+
+            <div id="div_mov"><h3>MOVIMENTI:</h3>
+                <table border="1">
+                    <tr> 
+                        <th>Versamenti</th> <th>Prelevamenti</th>
+                    </tr>
+
+                    <tr> <!--contenuto dei td dovranno essere gli importi che verso o prelevo ad ognuono ci dovrà esser un <br>-->
+                        <td id="td_vers"> </td> 
+                        <td id="td_prel"> </td>      
+
+                    </tr>
+                </table>
+            </div>
         </div>
 
 
@@ -64,6 +88,32 @@ and open the template in the editor.
         var txlogin = document.getElementById("in_name").value;
         document.getElementById("sp_name").innerHTML = document.getElementById("in_name").value;
         document.getElementById("in_name").value = "";
+
+
+
+    }
+
+
+    function loginUser() {
+        var okusr = "roxy";
+        var okpwd = "isma";
+        var oktkn = "110872";
+
+        var txusr = document.getElementById("in_usr").value;
+        var txpwd = document.getElementById("in_pwd").value;
+        var txtkn = document.getElementById("in_tkn").value;
+
+        if ((txusr === okusr && txpwd === okpwd) || txtkn === oktkn) {
+            //cosa fare se è vero e quindi ok
+            alert("ok ti faccio entrare");
+            document.getElementById("banca").style.display = "block";
+            document.getElementById("login").style.display = "none";
+
+
+        } else {
+            //cosa fare se errato
+            alert("user o passowrd errati, controlla e riprova!");
+        }
 
 
 
