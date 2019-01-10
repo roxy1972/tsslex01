@@ -45,6 +45,9 @@ and open the template in the editor.
             <div id="div_saldo">Saldo Corrente: <span id="sp_saldo">0</span> €</div>
             <br/>
 
+            <div id="div_movimenti">Array Movimenti: <span id="sp_movimenti">0</span></div>
+            <br/>
+
             <div class="versamenti"><h3>VERSAMENTI</h3></div> 
             <!--H3 serve per dare carattere più grande-->
             Importo da Versare: <input type="text" id="in_vers" value="" placeholder=""/> <button id="bt_vers" onclick="versaImporto()">Versa importo</button>
@@ -84,12 +87,39 @@ and open the template in the editor.
 
 
 <script>
+    var ar_movimenti = [];
+    // var ar_movimenti2 = new Array (12);
+
 
     function login() {
         var txlogin = document.getElementById("in_name").value;
         document.getElementById("sp_name").innerHTML = document.getElementById("in_name").value;
         document.getElementById("in_name").value = "";
+    }
 
+    function printMov() {
+        let text = "";
+        let mioSaldo = 0;
+        let maxVer = 0;
+        for (i = 0; i < ar_movimenti.length; i++) {
+            if (ar_movimenti[i] >= 0) {
+                segno = "+";
+                colore = "black"; 
+            } else {
+                segno = "";
+                colore ="red";
+            }
+            if (ar_movimenti[i] > maxVer)
+                maxVer = ar_movimenti[i];
+
+            text += "<br><b>#" + (i + 1) + "</b> <font color = '" + colore + "'>"+ segno + ar_movimenti [i] + "</font>";
+            mioSaldo += ar_movimenti[i];
+        }
+
+        text += "<br><b>SALDO:</b> " + mioSaldo;
+        text += "<br><b>Max Versamento:</b> " + maxVer;
+
+        return text;
 
 
     }
@@ -149,13 +179,17 @@ and open the template in the editor.
         } else {
             var importo = Number.parseFloat(tximp_vers);
             if (importo > 0) {
-
+                //aggiungo movimento ad ar_movimenti
+                ar_movimenti.push(importo);
 
                 //sommo finalmente due numeri e non due testi
                 var nuovo_saldo = saldo + importo;
                 //imposto il nuovo valore nello span sp_saldo
                 document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+                document.getElementById("sp_movimenti").innerHTML = printMov();
                 document.getElementById("in_vers").value = "";
+
+
 
                 //sistemo la tabella dei movimenti
                 var txtd_vers = document.getElementById("td_vers").innerHTML;
@@ -191,12 +225,16 @@ and open the template in the editor.
         } else {
             var importo = Number.parseFloat(tximp_prelev);
             if (importo > 0) {
+                //aggiungo movimento negativo ad ar_movimenti
+                ar_movimenti.push(-importo);
 
-                //sommo finalmente due numeri e non due testi
+                //sottraggo finalmente due numeri e non due testi
                 var nuovo_saldo = saldo - importo;
                 //imposto il nuovo valore nello span sp_saldo
                 document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+                document.getElementById("sp_movimenti").innerHTML = printMov();
                 document.getElementById("in_prel").value = " ";
+
                 //sistemo la tabella dei movimenti
                 var txtd_prel = document.getElementById("td_prel").innerHTML;
                 // sottraggo il nuovo importo + a capo <br>
